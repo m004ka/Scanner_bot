@@ -2,6 +2,7 @@ package org.urr.screenner_bot.config.bot;
 
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
@@ -12,6 +13,7 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 import org.urr.screenner_bot.service.telegram.TelegramBot;
 
 @Component
+@Slf4j
 @RequiredArgsConstructor
 public class BotInitializer {
 
@@ -25,7 +27,7 @@ public class BotInitializer {
             telegramBotsApi.registerBot(telegramBot);
         }catch (TelegramApiException e){
             e.printStackTrace();
-
+            log.error("Error occurred: " + e.getMessage());
         }
     }
 }
